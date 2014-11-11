@@ -10,4 +10,12 @@ Step 3 - git commit ("filename")
 
 n.b - commit does eveything or can do on a by file basis
 
-Step 4 - 	
+Step 4 - add notes in nedit (pops up after commit) 
+
+can also do commit -m (message) 
+
+---------------------------------------------------------
+STATUS CHECK - git status shows pending actions??? 
+
+LOG - git log - shows messages/notes 	
+---------------------------------------------------------
