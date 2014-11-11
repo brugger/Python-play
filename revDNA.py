@@ -2,3 +2,7 @@
 
 
 print "hello world"
+
+
+def revDNA(sequence):
+	pass
