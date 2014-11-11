@@ -1,0 +1,13 @@
+# Guide for working within git reposiroty 
+
+Step 1 - git add "file_name"
+
+This adds a new file to the git rep
+
+Step 2 - edit the file as much as you want to. 
+
+Step 3 - git commit ("filename")
+
+n.b - commit does eveything or can do on a by file basis
+
+Step 4 - 	
