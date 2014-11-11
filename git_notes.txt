@@ -18,3 +18,5 @@ STATUS CHECK - git status shows pending actions???
 
 LOG - git log - shows messages/notes 	
 ---------------------------------------------------------
+
+gitk nice source tree to show all the changes
