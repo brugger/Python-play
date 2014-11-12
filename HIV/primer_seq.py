@@ -69,7 +69,7 @@ def readin_fasta(file):
     if ( seq_name ):
         res.append( [seq_name, seq] )
 
-    pprint.pprint( res )
+#    pprint.pprint( res )
 
     return res
 # ----------- Reversing Primers -------------
