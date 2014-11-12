@@ -99,40 +99,39 @@ def seq_reverse(sequence):
 references = readin_fasta(sys.argv[ 1 ])
 primers    = readin_fasta(sys.argv[ 2 ])
 
-primer_names = dict()
-
 scores = dict()
 
-for reference in references:
-    [ref_name, ref_seq] = reference
-    scores[ ref_name ] = dict()
-    for primer in primers:
-        [primer_name, primer_seq] = primer
+reference_names = dict()
 
-        primer_seq_rev = seq_reverse( primer_seq )
+for primer in primers:
+    [primer_name, primer_seq] = primer
+    scores[ primer_name ] = dict()
+    primer_seq_rev = seq_reverse( primer_seq )
 
-        primer_names[ primer_name ] = 1
+    for reference in references:
+        [ref_name, ref_seq] = reference
+
+        reference_names[ ref_name ] = 1
 
         (score, pos) = best_pos(ref_seq, primer_seq)
         (score_rev, pos_rev) = best_pos(ref_seq, primer_seq_rev)
 
         if ( score_rev > score):
-            scores[ ref_name ][ primer_name ] = [score_rev, pos_rev, "r"]
+            scores[ primer_name ][ ref_name ] = [len(primer_seq), score_rev, pos_rev, "r"]
         else:
-            scores[ ref_name ][ primer_name ] = [score, pos, "f"]
+            scores[ primer_name ][ ref_name ] = [len(primer_seq), score, pos, "f"]
 
 
 
-print "\t".join([""]+primer_names.keys())
+print "\t".join([""]+ sorted(reference_names.keys()))
 
-for reference in scores:
+
+for primer_name in sorted(scores):
     line = []
-    for primer_name in primer_names:
 
-        if ( primer_name in scores[ reference ] ):
-            (score, pos, strand) = scores[ reference ][ primer_name]
-            line.append( str(score) +'/'+ strand + ",".join(pos))
-        else:
-            line.append( "--")
+    for reference in sorted( reference_names.keys()):
 
-    print "\t".join([ reference ] + line)
+        (primer_len, score, pos, strand) = scores[ primer_name ][ reference ]
+        line.append( "%d/%d %s [%s]" % (score, primer_len, strand, ",".join(pos)))
+
+    print "\t".join([ primer_name ] + line)
